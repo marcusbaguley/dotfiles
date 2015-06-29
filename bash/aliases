@@ -1,0 +1,18 @@
+# Textmate
+alias et='mate . &'
+alias ett='mate app doc config lib db public test script vendor spec Capfile Gemfile Gemfile.lock Rakefile &'
+
+# Ruby
+alias att='autotest'
+alias brake='bundle exec rake'
+alias be='bundle exec'
+
+
+alias tmux="TERM=screen-256color-bce tmux"
+
+alias git-tag-log="git for-each-ref --format '%(refname) %09 %(taggerdate) %(subject) %(taggeremail)' refs/tags  --sort=taggerdate"
+alias git-tree='git log --decorate --all --oneline --graph'
+
+alias vrspec='rspec -r ./spec/support/formatters/vim_formatter.rb -f VimFormatter --out tmp/quickfix.out --format progress'
+alias zvrspec='zeus rspec -r ./spec/support/formatters/vim_formatter.rb -f VimFormatter --out tmp/quickfix.out --format progress'
+alias zrspec='zeus rspec'

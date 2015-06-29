@@ -1,0 +1,91 @@
+find . -type f -name "*.swp" -exec rm -f {} \;
+find . -type f -name "*" | xargs grep 'word, phrase, or regular expression'
+
+# count the number of jpg files:
+find . -name \*.jpg -print | wc -l
+
+# rsync
+sudo rsync -azv --progress /var/lib/riak/leveldb /var/lib/riak/backup_leveldb_28_nov
+
+SHOW LARGE FILES (>1000MB)
+du -m . | perl -ne '@l = split();print "@l\n" if $l[0]>=1000'
+ 
+#remote branch first
+# creates a local branch tracking the remote
+git checkout -t origin/remotebranchname
+
+# local branch first 
+# create local branch and checkout, then push to remote with tracking...
+git checkout -b localbranchname
+git push -u origin localbranchname
+Method 2: On-disk setting (persistent)
+
+# remove untracked git files
+git clean -f -d
+# revert to commited files
+git reset --hard
+
+# undo a merge
+#for just undoing a Git Merge (as the title says) this is the easy way:
+git reset --hard ORIG_HEAD
+
+#Put committed files back to staging
+git reset --soft HEAD^
+
+# remove local branches that have been delete
+git remote update github --prune
+
+
+# Rebaseing
+
+push changes to origin - incase you stuff it up
+
+> git fetch
+> git rebase origin/develop
+> fix conflict
+> git add conflicted_file
+> git rebase --continue
+> git push -f
+done
+
+Squashing last 2 commits
+git rebase -i HEAD~2
+
+
+CHEF
+
+lock in the version into production-rev
+knife spork promote production-rev rev_app
+
+recipe remains un-frozen
+
+freeze
+knife cookbook upload reverend_app --freeze
+
+check what version is frozen
+knife spork check ruby_web_app
+======================
+
+Bundle local gems
+bundle config local.abc_engine abc_engine
+bundle config --delete local.abc_engine
+
+Disk Usage recursive
+du --max-depth=1 -lh /var/lib/elasticsearch/data/uat-cluster/nodes/0/indices/abc_users/*
+
+PG link file
+ln -s /var/pgsql_socket/.s.PGSQL.5432 /tmp/.s.PGSQL.5432
+
+
+RBENV
+ rbenv rehash
+
+VIM
+
+Find and Replace
+:args `grep 'live' -rl app` 
+:argdo %s/live/on/gc | w  
+
+# POSTGRES
+pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+elasticsearch -f -D es.config=/usr/local/opt/elasticsearch/config/elasticsearch.yml

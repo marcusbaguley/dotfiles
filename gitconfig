@@ -1,16 +1,22 @@
 [user]
-	name = Ben Orenstein
-	email = ben.orenstein@gmail.com 
+	name = Marcus Baguley
+	email = marcus.baguley@gmail.com 
 [alias]
+  st = status
+  ci = commit
+  br = branch
+  df = diff
+  lg = log -p
+  f = fetch -v        
 	co = checkout
-        cleanup = !git remote prune origin && git gc && git clean -df && git stash clear
+  cleanup = !git remote prune origin && git gc && git clean -df && git stash clear
 [color]
 	diff = auto
 	status = auto
 	branch = auto
 
 [color "diff"]
-        meta = yellow 
+  meta = yellow 
 
 [core]
 	excludesfile = ~/.gitignore
@@ -19,17 +25,15 @@
 	whitespace = nowarn
 
 [alias]
-      lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 [help]
 	autocorrect = 1
 [branch]
 	autosetupmerge = true
-        autosetuprebase = always
+  autosetuprebase = always
 [push]
 	default = current
 [rerere]
 	enabled = 1
-[github]
-	user = r00k
 [merge]
         ff = only
