@@ -6,6 +6,9 @@ Vim-users will likely find useful stuff in my [vimrc](vimrc), and also my [Ruby 
 
 I'm also a pretty aggressive aliaser. You might find a few you like in [zsh/aliases](zsh/aliases).
 
+/Users/marcusbaguley/.gvimrc -> /Users/marcusbaguley/.vim/janus/vim/gvimrc
+/Users/marcusbaguley/.vimrc -> /Users/marcusbaguley/.vim/vimrc
+
 ## Installation
 
   git clone git://github.com/r00k/dotfiles ~/.dotfiles
