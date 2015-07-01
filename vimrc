@@ -12,7 +12,14 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " My bundles
-Plugin 'ervandew/supertab'
+" Project file side pane.
+Bundle 'scrooloose/nerdtree'
+" Update Ctags on save
+Bundle 'vim-scripts/AutoTag'
+Bundle 'tpope/vim-abolish'
+
+
+" Plugin 'ervandew/supertab'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'skwp/greplace.vim'
 Plugin 'tomtom/tcomment_vim'
@@ -29,10 +36,10 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'ctrlpvim/ctrlp.vim'
 
 " Clojure
-Plugin 'guns/vim-clojure-static'
-Plugin 'tpope/vim-classpath'
-Plugin 'tpope/vim-fireplace'
-Plugin 'tpope/vim-leiningen'
+" Plugin 'guns/vim-clojure-static'
+" Plugin 'tpope/vim-classpath'
+" Plugin 'tpope/vim-fireplace'
+" Plugin 'tpope/vim-leiningen'
 
 " Colors
 Plugin 'nanotech/jellybeans.vim'
@@ -61,15 +68,15 @@ augroup myfiletypes
   autocmd FileType ruby,eruby,yaml setlocal iskeyword+=?
 
   " Clojure
-  autocmd FileType clojure setlocal colorcolumn=80
-  autocmd FileType clojure map <Leader>t :!lein test<cr>
+  " autocmd FileType clojure setlocal colorcolumn=80
+  " autocmd FileType clojure map <Leader>t :!lein test<cr>
 augroup END
 
 " Enable built-in matchit plugin
 runtime macros/matchit.vim
 " ================
 
-let mapleader = ","
+" let mapleader = ","
 
 map <Leader>ac :sp app/controllers/application_controller.rb<cr>
 vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
@@ -167,18 +174,22 @@ set smarttab
 set noincsearch
 set ignorecase smartcase
 set laststatus=2  " Always show status line.
-set relativenumber
+set number
 set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
 set autoindent " always set autoindenting on
 set bg=light
 set scrolloff=1
 set lazyredraw " Don't redraw screen when running macros.
-
+syntax enable
 " Set the tag file search order
 set tags=./tags;
 
 " Use Silver Searcher instead of grep
-set grepprg=ag
+if executable('ag')
+  set grepprg=ag
+endif
+
+
 
 " Make the omnicomplete text readable
 highlight PmenuSel ctermfg=black
@@ -212,7 +223,15 @@ au BufNewFile,BufRead *.txt setlocal nolist " Don't display whitespace
 " Better? completion on command line
 set wildmenu
 " What to do when I press 'wildchar'. Worth tweaking to see what feels right.
-set wildmode=list:full
+" set wildmode=list:full
+
+"
+" Autocomplete
+" ============
+set complete=.,b,u,]
+set wildmode=longest,list:longest
+set completeopt=menu,preview
+
 
 " (Hopefully) removes the delay when hitting esc in insert mode
 set noesckeys
@@ -339,6 +358,112 @@ autocmd FileType qf setlocal wrap linebreak
 " ========================================================================
 " End of things set by me.
 " ========================================================================
+" Thoughtbot
+" " Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+" Things from Cam
+"
+" kien/ctrlp.vim
+" ==============
+
+map <leader>] :CtrlP<CR>
+map <leader>} :CtrlPLine<CR>
+let g:ctrlp_custom_ignore = 'public/spree/products'
+" Use The Silver Searcher
+" https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+map <c-b> :CtrlPBuffer<CR>
+
+
+"
+" scrooloose/nerdtree
+" ===================
+
+map <leader>[ :NERDTreeToggle<CR>
+map <leader>{ :NERDTreeFind<CR>
+
+" Arrow keys for softies
+nnoremap <Left> h
+nnoremap <Right> l
+nnoremap <Up> k
+nnoremap <Down> j
+inoremap <up> k
+inoremap <down> j
+inoremap <left> h
+inoremap <right> l
+
+"
+" tpope/vim-markdown
+" ==================
+
+let g:markdown_fenced_languages = ['coffee', 'css', 'erb=eruby', 'javascript', 'js=javascript', 'json=javascript', 'ruby', 'sass', 'xml']
+
+
+
+"
+" scrooloose/syntastic
+" ====================
+
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_enable_balloons=0
+
+
+
+"
+" christoomey/vim-tmux-navigator
+" ==============================
+
+let g:tmux_navigator_no_mappings = 1
+nmap <silent> <c-h> :TmuxNavigateLeft<cr>
+nmap <silent> <c-j> :TmuxNavigateDown<cr>
+nmap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR>:TmuxNavigateRight<CR><C-l>
+nmap <silent> <c-\> :TmuxNavigatePrevious<cr>
+
+
+
+"
+" AndrewRadev/switch.vim
+" ======================
+
+nnoremap - :Switch<cr>
+
+
+
+"
+" thoughtbot/vim-rspec
+" ====================
+let g:rspec_command = "zvrspec {spec}"
+let g:rspec_runner = "os_x_iterm"
+"let g:rspec_command = "!clear; zeus rspec {spec}"
+"
+nmap <leader>R :let g:rspec_command = "zvrspec {spec}"
+" nmap <leader>R :let g:rspec_command = "!clear; zeus rspec {spec}"
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+
+
+
+" "
+" " tomtom/quickfixsigns_vim
+" " ========================
+
+highlight SignColumn guibg=background
+highlight SignColumn ctermbg=8
+let g:quickfixsigns_classes=['qfl', 'vcsdiff', 'breakpoints']
+let g:quickfixsigns_balloon=0
+
+" gvim - turn off balloon expressions
+let ballooneval=0
+
+
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")

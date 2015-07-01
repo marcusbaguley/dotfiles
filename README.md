@@ -1,6 +1,4 @@
-# Ben Orenstein's dot files
-
-These are config files to set up a system the way I like it.
+# Customised from Ben Orenstein's dot files
 
 Vim-users will likely find useful stuff in my [vimrc](vimrc), and also my [Ruby snippets](vim/snippets/ruby.snippets).
 
