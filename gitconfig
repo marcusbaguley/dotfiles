@@ -10,6 +10,7 @@
   f = fetch -v        
 	co = checkout
   cleanup = !git remote prune origin && git gc && git clean -df && git stash clear
+  track = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`"
 [color]
 	diff = auto
 	status = auto

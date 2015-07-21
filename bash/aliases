@@ -16,3 +16,5 @@ alias git-tree='git log --decorate --all --oneline --graph'
 alias vrspec='rspec -r ./spec/support/formatters/vim_formatter.rb -f VimFormatter --out tmp/quickfix.out --format progress'
 alias zvrspec='zeus rspec -r ./spec/support/formatters/vim_formatter.rb -f VimFormatter --out tmp/quickfix.out --format progress'
 alias zrspec='zeus rspec'
+
+alias rsleep='sleep $[ ( $RANDOM % 10 )  + 1 ]s;'

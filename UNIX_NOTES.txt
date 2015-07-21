@@ -51,6 +51,9 @@ done
 Squashing last 2 commits
 git rebase -i HEAD~2
 
+# Prunning
+# show remotes that can be pruned
+git remote prune origin --dry-run
 
 CHEF
 
@@ -85,7 +88,9 @@ VIM
 Find and Replace
 :args `grep 'live' -rl app` 
 :argdo %s/live/on/gc | w  
-
+# BASH
+# random sleep time before running a script
+sleep $[ ( $RANDOM % 10 )  + 1 ]s
 # POSTGRES
 pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
 elasticsearch -f -D es.config=/usr/local/opt/elasticsearch/config/elasticsearch.yml
