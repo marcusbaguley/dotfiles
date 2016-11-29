@@ -9,12 +9,12 @@ sudo rsync -azv --progress /var/lib/riak/leveldb /var/lib/riak/backup_leveldb_28
 
 SHOW LARGE FILES (>1000MB)
 du -m . | perl -ne '@l = split();print "@l\n" if $l[0]>=1000'
- 
+
 #remote branch first
 # creates a local branch tracking the remote
 git checkout -t origin/remotebranchname
 
-# local branch first 
+# local branch first
 # create local branch and checkout, then push to remote with tracking...
 git checkout -b localbranchname
 git push -u origin localbranchname
@@ -86,11 +86,15 @@ RBENV
 VIM
 
 Find and Replace
-:args `grep 'live' -rl app` 
-:argdo %s/live/on/gc | w  
+:args `grep 'live' -rl app`
+:argdo %s/live/on/gc | w
 # BASH
 # random sleep time before running a script
 sleep $[ ( $RANDOM % 10 )  + 1 ]s
 # POSTGRES
 pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
 elasticsearch -f -D es.config=/usr/local/opt/elasticsearch/config/elasticsearch.yml
+
+# Node Proxy Server
+npm config set proxy $http_proxy
+npm config set https-proxy $http_proxy

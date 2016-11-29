@@ -18,3 +18,11 @@ alias zvrspec='zeus rspec -r ./spec/support/formatters/vim_formatter.rb -f VimFo
 alias zrspec='zeus rspec'
 
 alias rsleep='sleep $[ ( $RANDOM % 10 )  + 1 ]s;'
+
+alias dm='eval $(docker-machine env)'
+
+alias fc='fleetctl'
+alias ec='etcdctl'
+alias fcl='fleetctl list-units'
+alias fcm='fleetctl list-machines'
+alias fcj='fleetctl journal'
