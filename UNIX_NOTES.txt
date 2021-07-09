@@ -80,9 +80,6 @@ PG link file
 ln -s /var/pgsql_socket/.s.PGSQL.5432 /tmp/.s.PGSQL.5432
 
 
-RBENV
- rbenv rehash
-
 VIM
 
 Find and Replace

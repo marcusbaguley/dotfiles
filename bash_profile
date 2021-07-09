@@ -19,6 +19,4 @@ export PATH=$PATH:$GOROOT/bin
 source ~/.dotfiles/bash/aliases
 source ~/.dotfiles/bash/functions
 source ~/.dotfiles/bash/prompt
-source ~/.dotfiles/bash/proxy # https://github.com/LoyaltyNZ/dev-wiki/blob/master/Network/proxy.sh
 
-eval "$(rbenv init -)"
