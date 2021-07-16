@@ -7,8 +7,19 @@ I'm also a pretty aggressive aliaser. You might find a few you like in [zsh/alia
 /Users/marcusbaguley/.gvimrc -> /Users/marcusbaguley/.vim/janus/vim/gvimrc
 /Users/marcusbaguley/.vimrc -> /Users/marcusbaguley/.vim/vimrc
 
-## Installation
+## asdf Installation
 
+Follow git install instructions
+
+## tmux Installation
+
+```
+$ cd
+$ git clone https://github.com/gpakosz/.tmux.git
+$ ln -s -f .tmux/.tmux.conf
+```
+
+## Installation
   git clone git://github.com/r00k/dotfiles ~/.dotfiles
   cd ~/.dotfiles
   rake install
