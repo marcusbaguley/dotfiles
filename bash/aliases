@@ -1,13 +1,3 @@
-# Textmate
-alias et='mate . &'
-alias ett='mate app doc config lib db public test script vendor spec Capfile Gemfile Gemfile.lock Rakefile &'
-
-# Ruby
-alias att='autotest'
-alias brake='bundle exec rake'
-alias be='bundle exec'
-
-
 alias tmux="TERM=screen-256color-bce tmux"
 
 alias git-tag-log="git for-each-ref --format '%(refname) %09 %(taggerdate) %(subject) %(taggeremail)' refs/tags  --sort=taggerdate"
@@ -16,18 +6,7 @@ alias git-rm-merged='git branch --merged | egrep -v "(^\*|master|develop)" | xar
 alias git-rm-merged-remote="git branch -r --merged | egrep -v \"(^\*|master|develop)\" | sed 's/origin\///' | xargs -n 1 git push --delete origin"
 alias git-rm-deleted-files="git ls-files --deleted -z | xargs -0 git rm "
 
-alias vrspec='rspec -r ./spec/support/formatters/vim_formatter.rb -f VimFormatter --out tmp/quickfix.out --format progress'
-alias zvrspec='zeus rspec -r ./spec/support/formatters/vim_formatter.rb -f VimFormatter --out tmp/quickfix.out --format progress'
-alias zrspec='zeus rspec'
-
 alias rsleep='sleep $[ ( $RANDOM % 10 )  + 1 ]s;'
 
 alias dm='eval $(docker-machine env)'
-
-alias fc='fleetctl'
-alias ec='etcdctl'
-alias fcl='fleetctl list-units'
-alias fcm='fleetctl list-machines'
-alias fcj='fleetctl journal'
-
 
