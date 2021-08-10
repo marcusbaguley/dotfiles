@@ -6,7 +6,7 @@ function set_aws_profile () {
   [[ $PWD == "$HOME/src/lic-nz"* ]] && export AWS_DEFAULT_PROFILE=licnz
   [[ $PWD == "$HOME/src/kiwibank"* ]] && export AWS_DEFAULT_PROFILE=kiwibank
   [[ $PWD == "$HOME/src/abletech"* ]] && export AWS_DEFAULT_PROFILE=abletech
-  export AWS_PROFILE=$ AWS_DEFAULT_PROFILE
+  export AWS_PROFILE=$AWS_DEFAULT_PROFILE
 }
 
 function directory_presets () {
