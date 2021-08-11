@@ -12,3 +12,5 @@ image-tag () {
     echo "Could not find file: $file"
   fi
 }
+alias groot='cd $(git rev-parse --show-toplevel)'
+alias aws-login='$(aws ecr get-login --no-include-email --region ap-southeast-2)'
