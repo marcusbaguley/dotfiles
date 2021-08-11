@@ -2,10 +2,12 @@
 
 function set_aws_profile () {
   unset AWS_DEFAULT_PROFILE
-  [[ $PWD == "$HOME/src/loyalty"* ]] && export AWS_DEFAULT_PROFILE=loyalty
-  [[ $PWD == "$HOME/src/lic-nz"* ]] && export AWS_DEFAULT_PROFILE=licnz
-  [[ $PWD == "$HOME/src/kiwibank"* ]] && export AWS_DEFAULT_PROFILE=kiwibank
-  [[ $PWD == "$HOME/src/abletech"* ]] && export AWS_DEFAULT_PROFILE=abletech
+  current_path=%~
+  [[ $current_path == *"lic-nz"* ]] && export AWS_DEFAULT_PROFILE=licnz
+  [[ $current_path == *"kiwibank"* ]] && export AWS_DEFAULT_PROFILE=kiwibank
+  [[ $current_path == *"abletech"* ]] && export AWS_DEFAULT_PROFILE=abletech
+  [[ $current_path == *"src/abletech"* ]] && echo 'in abletech'
+  echo $AWS_DEFAULT_PROFILE
   export AWS_PROFILE=$AWS_DEFAULT_PROFILE
 }
 
@@ -15,11 +17,12 @@ function directory_presets () {
   if [[ $OLD_AWS_PROFILE != $AWS_DEFAULT_PROFILE ]]; then
     echo "Changing AWS profile to $AWS_DEFAULT_PROFILE"
   fi
-  return $AWS_PROFILE
+  echo "AWS profile to $AWS_DEFAULT_PROFILE"
+  return ''
 }
 
-PROMPT_COMMAND='directory_presets'
-RPROMPT=$(directory_presets)
+#setopt PROMPT_SUBST
+#PROMPT="$(directory_presets)$PROMPT"
 
 
 # Matches the current directory name against an task defintion family in ECS,
