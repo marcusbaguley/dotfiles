@@ -13,4 +13,10 @@ image-tag () {
   fi
 }
 alias groot='cd $(git rev-parse --show-toplevel)'
-alias aws-login='$(aws ecr get-login --no-include-email --region ap-southeast-2)'
+aws-login () {
+  if [[ $1 == 'kiwibank' ]]; then
+    aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin 558833745501.dkr.ecr.ap-southeast-2.amazonaws.com
+  else
+    echo 'please pass profile name or configure script'
+  fi
+}
