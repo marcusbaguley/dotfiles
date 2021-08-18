@@ -6,7 +6,7 @@ image-tag () {
   file="./infrastructure/$1/main.tf"
   if [[ -e $file ]]; then
       file="infrastructure/$1/main.tf"
-      sed '/image_tag/s/".*"/"'$NEW_VERSION'"/' $file
+      sed -i '' '/image_tag/s/".*"/"'$NEW_VERSION'"/' $file
   else
     echo "usage image_tag <environment> "
     echo "Could not find file: $file"
