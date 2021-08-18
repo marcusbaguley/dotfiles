@@ -2,6 +2,5 @@ for file in ~/.zsh-aliases/*; do
    source "$file"
 done
 
-source ~/.oh-my-zsh/plugins/aws/aws.plugin.zsh
 export PATH=${PATH}:${HOME}/src/abletech/operations/bin
 export PATH=${PATH}:${HOME}/src/abletech/aws-tools/bin
