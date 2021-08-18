@@ -5,3 +5,7 @@ done
 source ~/.oh-my-zsh/plugins/aws/aws.plugin.zsh
 export PATH=${PATH}:${HOME}/src/abletech/operations/bin
 export PATH=${PATH}:${HOME}/src/abletech/aws-tools/bin
+
+# on theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme change to include path in prompt.
+PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
+PROMPT+=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
