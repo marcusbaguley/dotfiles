@@ -20,3 +20,11 @@ aws-login () {
     echo 'please pass profile name or configure script'
   fi
 }
+
+git-diff-untracked () {
+  for next in $( git ls-files --others --exclude-standard ) ; do git --no-pager diff --no-index /dev/null $next; done;
+}
+
+clear-scrollback () {
+  clear && printf '\e[3J'
+}
