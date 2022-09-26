@@ -1,6 +1,6 @@
 [user]
-	name = Marcus Baguley
-	email = marcus.baguley@gmail.com
+  name = Marcus Baguley
+  email = marcus.baguley@gmail.com
 [alias]
   st = status
   ci = commit
@@ -8,39 +8,40 @@
   df = diff
   lg = log -p
   f = fetch -v
-	co = checkout
+  co = checkout
   cleanup = !git remote prune origin && git gc && git clean -df && git stash clear
   track = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`"
   tree = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   fresh = "!f() { git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:cyan)%(refname:short)%(color:reset) | %(committerdate:relative)%(color:reset) | %(subject)' | column -s '|' -t; }; f"
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+  diff = auto
+  status = auto
+  branch = auto
 
 [color "diff"]
   meta = yellow
 
 [core]
-	excludesfile = /Users/marcusbaguley/.gitignore
-	editor = vim --noplugin
+  excludesfile = /Users/marcusbaguley/.gitignore
+  editor = vim --noplugin
 [apply]
-	whitespace = nowarn
+  whitespace = nowarn
 
 [help]
-	autocorrect = 1
+  autocorrect = 1
 [branch]
-	autosetupmerge = true
+  autosetupmerge = true
   autosetuprebase = always
 [push]
-	default = current
+  default = simple
+  autoSetupRemote = true
 [rerere]
-	enabled = 1
+  enabled = 1
 [merge]
-        ff = only
+  ff = only
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path =
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
