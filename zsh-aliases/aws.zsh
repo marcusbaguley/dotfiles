@@ -34,7 +34,7 @@ ecs-deploy-kb-lint () {
 }
 
 ecs-deploy-kb-uat () {
-  aws-ecs-build || return 1
+  # aws-ecs-build || return 1
   tag="$(git describe --tags)"
   ecs deploy kiwibank-uat ${PWD##*/} -t $tag || return 1
 }

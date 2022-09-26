@@ -337,6 +337,8 @@ set -g mouse on
 set -g status-keys vi
 set -g mode-keys vi
 
+# enable vim to see file status events so it knows when a file has changed when running in tmux
+set-option -g focus-events on
 # replace C-b by C-a instead of using both prefixes
 # set -gu prefix2
 # unbind C-a
