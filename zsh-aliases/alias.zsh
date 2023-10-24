@@ -28,3 +28,7 @@ git-diff-untracked () {
 clear-scrollback () {
   clear && printf '\e[3J'
 }
+
+kdc () {
+   docker-compose run ${PWD##**/} $@
+}
