@@ -10,7 +10,7 @@ function ecs-image-version {
 # logs
 #  aws-logs kiwibank_lint app_auth
 
-aws-ecs-build () {
+ecs-build () {
   account_id="$(aws sts get-caller-identity --query \"Account\" --output text)"
   docker build -t ${PWD##*/} . || return 1
   tag="$(git describe --tags)"
@@ -24,7 +24,7 @@ aws-login () {
 }
 
 ecs-deploy-kb-lint () {
-  aws-ecs-build || return 1
+  ecs-build || return 1
   parent_dir=${dir//\/bin/}
   service_name=${parent_dir##*/}
 
@@ -34,7 +34,7 @@ ecs-deploy-kb-lint () {
 }
 
 ecs-deploy-kb-uat () {
-  # aws-ecs-build || return 1
+  ecs-build || return 1
   tag="$(git describe --tags)"
   ecs deploy kiwibank-uat ${PWD##*/} -t $tag || return 1
 }
