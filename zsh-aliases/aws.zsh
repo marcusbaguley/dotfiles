@@ -23,6 +23,8 @@ aws-login () {
   aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin $account_id.dkr.ecr.ap-southeast-2.amazonaws.com
 }
 
+# https://github.com/fabfuel/ecs-deploy
+# also, run aws-login first
 ecs-deploy-kb-lint () {
   ecs-build || return 1
   parent_dir=${dir//\/bin/}
