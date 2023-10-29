@@ -17,6 +17,12 @@ complete -C '/opt/homebrew/bin/aws_completer' aws
 # Add homebrew
 export PATH=${PATH}:/opt/homebrew/bin
 
+# pip binaries
+export PATH="`python3 -m site --user-base`/bin:$PATH"
+
+# brew mysql-client on m1 gets installed here....
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
 # on theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme change to include path in prompt.
 PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
 PROMPT+=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
