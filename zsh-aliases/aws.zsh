@@ -11,8 +11,24 @@ function ecs-image-version {
 #  aws-logs kiwibank_lint app_auth
 
 ecs-build () {
+
+  architecture=$(uname -m)
+
+  case $architecture in
+      x86_64|amd64)
+          echo "Detected amd64 architecture."
+          docker build -t ${PWD##*/} . || return 1
+          ;;
+      arm*|aarch64)
+          echo "Detected ARM architecture."
+          docker buildx build --platform linux/amd64 -t ${PWD##*/} . || return 1
+          ;;
+      *)
+          echo "Unknown architecture: $architecture"
+          return 1;
+  esac
+
   account_id="$(aws sts get-caller-identity --query \"Account\" --output text)"
-  docker build -t ${PWD##*/} . || return 1
   tag="$(git describe --tags)"
   docker tag ${PWD##*/}:latest $account_id.dkr.ecr.ap-southeast-2.amazonaws.com/${PWD##*/}:$tag || return 1
   docker push $account_id.dkr.ecr.ap-southeast-2.amazonaws.com/${PWD##*/}:$tag || return
