@@ -56,3 +56,7 @@ ecs-deploy-kb-uat () {
   tag="$(git describe --tags)"
   ecs deploy kiwibank-uat ${PWD##*/} -t $tag || return 1
 }
+
+eks-login () {
+  aws eks --region ap-southeast-2 update-kubeconfig --name rnz
+}
