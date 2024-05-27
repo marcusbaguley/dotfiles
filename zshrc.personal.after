@@ -20,6 +20,9 @@ export PATH=${PATH}:/opt/homebrew/bin
 # pip binaries
 export PATH="`python3 -m site --user-base`/bin:$PATH"
 
+# docker
+export PATH="$HOME/.docker/bin:$PATH"
+
 # brew mysql-client on m1 gets installed here....
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 
