@@ -25,3 +25,5 @@ clear-scrollback () {
 kdc () {
    docker-compose run ${PWD##**/} $@
 }
+
+alias bigfiles='du -hd 2 . | sort -hr | head -n 20'
