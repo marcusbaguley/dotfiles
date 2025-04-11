@@ -29,3 +29,5 @@ export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 # on theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme change to include path in prompt.
 PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
 PROMPT+=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
+export ADDRESSFINDER_API_IP=127.0.0.2
+export ADDRESSFINDER_API_PORT=3002

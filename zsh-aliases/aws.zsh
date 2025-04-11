@@ -60,3 +60,25 @@ ecs-deploy-kb-uat () {
 eks-login () {
   aws eks --region ap-southeast-2 update-kubeconfig --name rnz
 }
+
+# ecs-portal-exec staging cron
+ecs-portal-exec() {
+  local env="$1"
+  local service="$2"
+
+  local taskid=$(aws ecs list-tasks \
+    --cluster "cluster-portal-${env}" \
+    --service "${service}" | \
+    jq -r '.taskArns[0]' | \
+    awk -F/ '{print $NF}')
+
+  aws ecs execute-command \
+    --cli-read-timeout 0 \
+    --cli-connect-timeout 0 \
+    --cluster "cluster-portal-${env}" \
+    --container "${service}" \
+    --interactive \
+    --task "${taskid}" \
+    --command "sh"
+}
+
