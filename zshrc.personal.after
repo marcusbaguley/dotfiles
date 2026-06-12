@@ -6,16 +6,17 @@ source ~/.oh-my-zsh/plugins/aws/aws.plugin.zsh
 export PATH=${PATH}:${HOME}/src/abletech/operations/bin
 export PATH=${PATH}:${HOME}/src/abletech/aws-tools/bin
 
-# Load asdf
-autoload -U +X bashcompinit && bashcompinit
-autoload -U +X compinit && compinit
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
+# Resolve aws_completer dynamically so this works on both Intel (/usr/local)
+# and Apple Silicon (/opt/homebrew) without hardcoding the path.
+if (( $+commands[aws_completer] )); then
+  complete -C "$commands[aws_completer]" aws
+fi
 
-complete -C '/opt/homebrew/bin/aws_completer' aws
-
-# Add homebrew
-export PATH=${PATH}:/opt/homebrew/bin
+# Add homebrew (prefix differs: Intel=/usr/local, Apple Silicon=/opt/homebrew)
+if command -v brew >/dev/null 2>&1; then
+  BREW_PREFIX="$(brew --prefix)"
+  export PATH=${PATH}:${BREW_PREFIX}/bin
+fi
 
 # pip binaries
 export PATH="`python3 -m site --user-base`/bin:$PATH"
@@ -23,8 +24,10 @@ export PATH="`python3 -m site --user-base`/bin:$PATH"
 # docker
 export PATH="$HOME/.docker/bin:$PATH"
 
-# brew mysql-client on m1 gets installed here....
-export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+# brew mysql-client (keg-only, not symlinked into bin)
+if [ -n "${BREW_PREFIX:-}" ] && [ -d "${BREW_PREFIX}/opt/mysql-client/bin" ]; then
+  export PATH="${BREW_PREFIX}/opt/mysql-client/bin:$PATH"
+fi
 
 # on theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme change to include path in prompt.
 PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
