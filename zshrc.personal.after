@@ -24,11 +24,6 @@ export PATH="`python3 -m site --user-base`/bin:$PATH"
 # docker
 export PATH="$HOME/.docker/bin:$PATH"
 
-# brew mysql-client (keg-only, not symlinked into bin)
-if [ -n "${BREW_PREFIX:-}" ] && [ -d "${BREW_PREFIX}/opt/mysql-client/bin" ]; then
-  export PATH="${BREW_PREFIX}/opt/mysql-client/bin:$PATH"
-fi
-
 # on theme ~/.oh-my-zsh/themes/robbyrussell.zsh-theme change to include path in prompt.
 PROMPT="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )"
 PROMPT+=' %{$fg[cyan]%}%~%{$reset_color%} $(git_prompt_info)'
