@@ -82,3 +82,27 @@ ecs-portal-exec() {
     --command "sh"
 }
 
+set-portal-secret() {
+  local env="$1" key="$2" value="$3"
+  if [[ -z "$env" || -z "$key" || -z "$value" ]]; then
+    echo "usage: set-ssm-secret <dev|staging|production> <KEY> <value>" >&2
+    return 1
+  fi
+  case "$env" in
+    dev|staging|production) ;;
+    *) echo "error: environment must be dev, staging, or production" >&2; return 1 ;;
+  esac
+
+  local name="portal/${env}/${key}"
+  local current
+  if current=$(aws secretsmanager get-secret-value --secret-id "$name" \
+                 --query SecretString --output text 2>/dev/null); then
+    echo "Updating ${name} (replacing: ${current})"
+    aws secretsmanager put-secret-value --secret-id "$name" --secret-string "$value" >/dev/null \
+      && echo "Updated ${name}"
+  else
+    echo "Creating ${name}"
+    aws secretsmanager create-secret --name "$name" --secret-string "$value" >/dev/null \
+      && echo "Created ${name}"
+  fi
+}
